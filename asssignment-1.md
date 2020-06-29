@@ -44,7 +44,7 @@ sudo chmod -x /usr/bin/firefox
 * Create a directory without name from command line
 * create a directory with name "-okgoogle"
 
-For this task we will be *using the **mkdir** command* to create te specified directories.
+For this task we will be *using the **mkdir** command* to create the specified directories.
 
 #### Directory without name
 ![Pic-1](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/QUESTION%202/1.png?raw=true)
@@ -55,7 +55,7 @@ mkdir DIRECTORY_NAME
 ```
 2. But, as we wish to create a directory without any name, and we can't leave the arguments blank, so we will use **"** to specify the name
 ```
-mkdir " "
+mkdir ''$'\n'
 ```
 > It will create a driectory without any name in the current folder. 
 3. The directory is visible both in CLI and GUI.
@@ -74,3 +74,88 @@ mkdir ./-okgoogle
 > It will create a driectory without any name in the current folder. 
 >> Even, using **"** in the case without using **./** will result in error, as now also mkdir will accept that as option for mkdir.
 3. The directory is visible both in CLI and GUI.
+
+## Question 3 : Create Directory Structure :
+
+**NOTE:** We are allowed to use a single command and only one time.
+
+* Create a directory structure as described above
+
+For this task we will be *using the **mkdir** command* to create the specified directories.
+
+#### Directory Structure
+![Pic-1](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/QUESTION%203/1.png?raw=true)
+
+1. Here we need to create a directory structure and that too in one line so we will use **-p** option with the command
+```
+mkdir -p A/{B/{G/K/Reboot.txt,H/J/Reboot.txt},C/{I/J/Reboot.txt,J/L/Reboot.txt},D/{F/L/Reboot.txt,E/M/Reboot.txt}}
+```
+2. We will see the directory using the tree command
+```
+tree A
+```
+> It will create a driectory without any name in the current folder.
+
+## Question 4 : Sharing the files and folder 
+
+* Create two users name jack and jill from command line.
+* Create all the data under home directory of each users.
+* Login with jack user and create a file name jack.txt using vim editor and write "hello jack".
+* From jack user also create two directories name jack1 & jack2. 
+* Now login from Jill user and create a file. Jill.txt using vim editor and write "hey jiil"
+* From Jill also create two directoires named jill1 & jill2.
+
+**IMPORTANT :** Swap these files and directories in between user and to swap don't use root account.
+
+#### File Sharing between users
+![Pic-1](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/QUESTION%204/1.png?raw=true)
+
+1. First we need to create the users jack and jill. Now we need to set the password for the users.
+```
+sudo adduser jack
+sudo adduser jill
+
+sudo passwd jack
+sudo passwd jill
+```
+2. We need to add the home directories of the users to each other's group.
+```
+sudo chgrp jill /home/jack
+sudo chgrp jack /home/jill
+```
+3. Switch to jack and create the files and folders. We can use ls to view the content.
+```
+su - jack -> Enter password for jack
+vim jack.txt
+mkdir jack1
+mkdir jack2
+ls
+logout
+```
+4. Switch to jill and create the files and folders. We can use ls to view the content.
+```
+su - jill -> Enter password for jill
+vim jill.txt
+mkdir jill1
+mkdir jill2
+ls
+logout
+```
+5. Now we can access each other user's file from the other user.
+```
+su - jack
+mv jack1 /home/jill
+mv jack2 /home/jill
+mv jack.txt /home/jill
+cd /home/jill
+mv jill.txt $HOME
+mv jill1 $HOME
+mv jill2 $HOME
+ls
+cd
+ls
+logout
+```
+![Pic-2](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/QUESTION%204/2.png?raw=true)
+
+6. The files have been shared between the users without using root permissions.
