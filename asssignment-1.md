@@ -1,6 +1,8 @@
 # Assignment-1
 
-![Assignment](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/ASSIGNMENT.png?raw=true)
+![Assignment](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/ASSIGNMENT_1.png?raw=true)
+
+![Assignment](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/ASSIGNMENT_2.png?raw=true)
 
 ## Question 1 : Block System Call :
 
@@ -159,3 +161,47 @@ logout
 ![Pic-2](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/QUESTION%204/2.png?raw=true)
 
 6. The files have been shared between the users without using root permissions.
+
+## Question 5 : Play with Files and Directories :
+
+* Create 4 files named 'abc.txt', 'ok', 'fine' and 'g.txt' under /tmp directory.
+* Create 3 directories 'aa', 'aaa', 'aaaa' under /tmp directory.
+* Give ls command to list the content of /tmp directory.
+* Make sure it will only list the content (file|directory) having 2 char in their name.
+
+For this task we will be *using the **mkdir, touch and ls** command* to create directories, files and viewing the content respectively.
+
+![Pic-1](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/QUESTION%205/1.png?raw=true)
+
+1. We need to create multiple directories in /tmp folder and such can be achieved using
+```
+touch /tmp/{abc.txt,ok,fine,g.txt}
+```
+2. We need to create multiple directories in /tmp folder and such can be achieved using
+```
+mkdir /tmp/{aa,aaa,aaaa}
+```
+3. For listing only files and directories with 2 characters,
+```
+ls --ignore='???*' --ignore='?' /tmp
+```
+> --ignore option will ignore the files matching specified pattern.
+>> ???* will ignore all the files having three or more characters in their name.
+>>
+>> ? will ignore files having single name character.
+
+## Question 6 : Run command without any output :
+
+* Open terminal and type any command.
+* Once you press 'enter' your output of given command must not print.
+* You are not allowed to redirect output anywhere.
+
+![Pic-1](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/QUESTION%206/1.png?raw=true)
+
+1. We will use **:** before the command, for not printing it's output
+```
+: $(COMMAND)
+```
+> **:** specifies to do nothing.
+>
+> **$(COMMAND)** specifies to run the command.
