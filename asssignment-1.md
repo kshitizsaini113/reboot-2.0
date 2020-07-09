@@ -205,3 +205,118 @@ ls --ignore='???*' --ignore='?' /tmp
 > **:** specifies to do nothing.
 >
 > **$(COMMAND)** specifies to run the command.
+
+## Question 7 : Create Shell Script :
+
+* Create a shell script named /root/delvex.sh.
+* Make sure it will run /bin/sh shell.
+* A user will be running this script my using a command name opensource
+* When a user  run like  "opensource  time" it must give current time only.
+* When it runs like "opensource user"  it will give list of interactive shell users only.
+* When run like "opensource 100"  it must print "Hello Delvex" 100 times in interval of 1 sec.
+* If runs like  "opensource windows"  then it must shutdown OS.
+* if run opensource command without any parameter  then it must show out:
+    1) Name of Kernel
+    2) Version of Kernel
+    3) Current date DD/MM/YY
+    4) Name of OS
+    5) Last reboot time
+
+> Each output for last option must be in a separate line.
+
+![Pic-1](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/QUESTION%207/1.png?raw=true)
+
+1. Create a file named delvex.sh using vim
+```
+vim /root/delvex.sh
+```
+2. Create the shell script as specified
+```
+#!/bin/sh
+
+if [ $# == 0 ]
+then
+	echo ""
+	uname -r
+	echo ""
+	cat /proc/version
+	echo ""
+	date +%D
+	echo ""
+	cat /etc/os-release | head -n 1
+	echo ""
+	last reboot | head -n 1
+	echo ""
+elif [ $1 == "time" ]
+then
+	echo ""
+	date +%T
+	echo ""
+elif [ $1 == "user" ]
+then
+	echo ""
+	users
+	echo ""
+elif [ $1 == "100" ]
+then
+	echo ""
+	count=0
+	while [ $count -le 100 ]
+	do
+		echo "Hello Delvex"
+		sleep 1
+	done
+	echo ""
+elif [ $1 == "windows" ]
+then
+	echo ""
+	shutdown
+	echo ""
+fi
+```
+3. Add execution permission to the script and the directory
+```
+chmod +x /root/delvex.sh
+chmod +x /root
+```
+4. Create a script as opensource and call the script from there.
+```
+vim /usr/bin/opensource
+```
+5. Add the following to the above created script
+```
+#!/bin/sh
+
+/root/delvex.sh $@
+```
+6. All execution permission to the script and run from an user.
+```
+chmod +x /usr/bin/opensource
+```
+
+## Question 8 : Create a user with default settings :
+ 
+* Create a user name delvex and password of this user will be fedora.
+* When user got created below listed things will come by default.
+* History size will be 5000.
+* History file will be  /home/delvex/myhist.txt .
+* Default shell will be  /bin/sh .
+
+![Pic-1](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/QUESTION%208/1.png?raw=true)
+
+1. Edit the /etc/bashrc file and edd the following to the end.
+```
+if [ $USER == "delvex" ]
+then
+	HISTSIZE=5000
+	HISTFILE=/home/delvex/myhist.txt
+	SHELL=/bin/sh
+	export HISTSIZE HISTFILE SHELL
+fi
+```
+2. Create the user delvex and set the password.
+```
+useradd delvex
+passwd delvex
+```
+3. Changes will be reflected in user.
