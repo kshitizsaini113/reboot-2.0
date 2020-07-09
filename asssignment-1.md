@@ -12,34 +12,15 @@
 
 For this task we will be *removing the execution permission from the commands* so that they do not get executed when used, not even for root user. For this we will need the root user access. 
 
-#### Date Command
-![Pic-1](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/QUESTION%201/1.png?raw=true)
+![Pic-1](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/QUESTION%201/9.png?raw=true)
 
-1. Here in the images for date, first we need to find where the command is located so I have used the **which** command to find that.
+1. We will edit the .bashrc file and set the alias for the commands.
 ```
-which date
+alias date=": date"
+alias firefox=":firefox"
 ```
-2. Further, as the command is executing and we need to block the execution of the command without uninstalling it so I have used **chmod** and removed the execution permission from the command.
-```
-sudo chmod -x /usr/bin/date
-```
-> I have performed this operation with sudo privilages as I need to change the permission for all the users, even root.
-3. Try executing the command, and the command will not be accessible. Not even with root user.
+2. When we run the commands from the user no output will be shown and even the commands will not be uninstalled.
 
-#### Firefox Command
-![Pic-2](https://github.com/kshitizsaini113/reboot-2.0/blob/master/1/QUESTION%201/2.png?raw=true)
-
-1. Here in the images for firefox, first we need to find where the command is located so I have used the **which** command to find that.
-```
-which firefox
-```
-2. Further, as the command is executing and we need to block the execution of the command without uninstalling it so I have used **chmod** and removed the execution permission from the command.
-```
-sudo chmod -x /usr/bin/firefox
-```
-> I have performed this operation with sudo privilages as I need to change the permission for all the users, even root.
->> This will remove the permission to access the command even from the GUI click in the App List. 
-3. Try executing the command, and the command will not be accessible. Not even with root user.
 
 ## Question 2 : Play with Directory :
 
