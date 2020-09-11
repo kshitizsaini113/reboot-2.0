@@ -27,7 +27,7 @@ then
 	echo "$uname:x:$uid:">>/etc/group
 	echo "$uname:!::">>/etc/gshadow
 	mkdir /home/$uname
-	cp -rvf /etc/skel/ /home/$uname > /dev/null
+	cp -a /etc/skel/. /home/$uname/
 	chown $uname:$uname /home/$uname/ -R
 	chmod 0700 /home/$uname/ -R
 	touch /var/spool/mail/$uname
