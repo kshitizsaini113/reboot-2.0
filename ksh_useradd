@@ -1,39 +1,33 @@
 #!/bin/bash
 
-datediff --version > /dev/null
-if [ $? -ne 0 ]
-then
-	yum install datediff -y
-fi
-
 uname=$1
 
 id -u $uname&>/dev/null
 
 if [ $? -ne 0 ]
 then
-	for i in {1000..60000}
-	do 
-		id -u $i&>/dev/null & id -g $i&>/dev/null
-		if [ $? -ne 0 ]
-		then
-			break
-		fi
-	done
-	uid=$i
-	echo "$uname:x:$uid:$uid::/home/$uname:/bin/bash">>/etc/passwd
-	lastpwdchange=$(datediff 1970-01-01 `date +"%Y-%m-%d"`)
-	echo "$uname::$lastpwdchange:0:99999:7:::">>/etc/shadow
-	echo "$uname:x:$uid:">>/etc/group
-	echo "$uname:!::">>/etc/gshadow
-	mkdir /home/$uname
-	cp -a /etc/skel/. /home/$uname/
-	chown $uname:$uname /home/$uname/ -R
-	chmod 0700 /home/$uname/ -R
-	touch /var/spool/mail/$uname
-	chown $uname:$uname /var/spool/mail/$uname
+        for i in {1000..60000}
+        do
+                id -u $i&>/dev/null & id -g $i&>/dev/null
+                if [ $? -ne 0 ]
+                then
+                        break
+                fi
+        done
+        uid=$i
+        echo "$uname:x:$uid:$uid::/home/$uname:/bin/bash">>/etc/passwd
+        lastpwdchange=$(date +%s)
+        echo "$uname::$lastpwdchange:0:99999:7:::">>/etc/shadow
+        echo "$uname:x:$uid:">>/etc/group
+        echo "$uname:!::">>/etc/gshadow
+        mkdir /home/$uname
+        cp -a /etc/skel/. /home/$uname/
+        chown $uname:$uname /home/$uname/ -R
+        chmod 0700 /home/$uname/ -R
+        touch /var/spool/mail/$uname
+        chown $uname:$uname /var/spool/mail/$uname
 
-	echo "User successfully created"
+        echo "User successfully created"
 else
-	echo "User already exists : try using a unique username">&2
+        echo "User already exists : try using a unique username">&2
 fi
